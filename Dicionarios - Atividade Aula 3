@@ -1,0 +1,63 @@
+def exibir_lista(lista):
+    if not lista:
+        print("A lista de compras está vazia.")
+    else:
+        print("Lista de Compras:")
+        for produto, quantidade in lista.items():
+            print(f"{produto}: {quantidade}")
+
+def adicionar_produto(lista):
+    produto = input("Digite o nome do produto: ").strip()
+    quantidade = int(input("Digite a quantidade: "))
+    if produto in lista:
+        lista[produto] += quantidade
+    else:
+        lista[produto] = quantidade
+    print(f"{quantidade} de '{produto}' foi adicionado(a) à lista.")
+
+def alterar_quantidade(lista):
+    produto = input("Digite o nome do produto que deseja alterar: ").strip()
+    if produto in lista:
+        nova_quantidade = int(input("Digite a nova quantidade: "))
+        if nova_quantidade == 0:
+            del lista[produto]
+            print(f"'{produto}' foi removido(a) da lista.")
+        else:
+            lista[produto] = nova_quantidade
+            print(f"A quantidade de '{produto}' foi alterada para {nova_quantidade}.")
+    else:
+        print(f"'{produto}' não está na lista.")
+
+def remover_produto(lista):
+    produto = input("Digite o nome do produto que deseja remover: ").strip()
+    if produto in lista:
+        del lista[produto]
+        print(f"'{produto}' foi removido(a) da lista.")
+    else:
+        print(f"'{produto}' não está na lista.")
+
+def main():
+    lista_compras = {}
+    while True:
+        print("\nMenu:")
+        print("1. Adicionar produto")
+        print("2. Alterar quantidade")
+        print("3. Remover produto")
+        print("4. Exibir lista de compras")
+        print("5. Sair")
+        opcao = input("Escolha uma opção: ")
+        if opcao == '1':
+            adicionar_produto(lista_compras)
+        elif opcao == '2':
+            alterar_quantidade(lista_compras)
+        elif opcao == '3':
+            remover_produto(lista_compras)
+        elif opcao == '4':
+            exibir_lista(lista_compras)
+        elif opcao == '5':
+            print("Programa encerrado.")
+            break
+        else:
+            print("Opção inválida. Tente novamente.")
+
+main()

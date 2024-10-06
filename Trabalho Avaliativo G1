@@ -1,0 +1,72 @@
+estoque = {}
+vendas = []
+
+def adicionar_produto():
+    nome = input("Digite o nome do produto: ")
+    quantidade = int(input("Digite a quantidade em estoque: "))
+    preco = float(input("Digite o preço unitário: "))
+    
+    estoque[nome] = {'quantidade': quantidade, 'preco': preco}
+    print(f"Produto '{nome}' adicionado ao estoque.")
+
+def buscar_produto():
+    nome = input("Digite o nome do produto que deseja buscar: ")
+    if nome in estoque:
+        produto = estoque[nome]
+        print(f"Produto: {nome}, Quantidade: {produto['quantidade']}, Preço: R$ {produto['preco']:.2f}")
+    else:
+        print("Produto não encontrado.")
+
+def visualizar_produtos():
+    if not estoque:
+        print("Não há produtos no estoque.")
+        return
+    
+    print("Produtos em estoque:")
+    for nome, info in estoque.items():
+        print(f"Produto: {nome}, Quantidade: {info['quantidade']}, Preço: R$ {info['preco']:.2f}")
+
+def vender_produto():
+    nome = input("Digite o nome do produto vendido: ")
+    quantidade_vendida = int(input("Digite a quantidade vendida: "))
+    
+    if nome in estoque and estoque[nome]['quantidade'] >= quantidade_vendida:
+        estoque[nome]['quantidade'] -= quantidade_vendida
+        valor_total = quantidade_vendida * estoque[nome]['preco']
+        vendas.append({'produto': nome, 'quantidade': quantidade_vendida, 'valor_total': valor_total})
+        print(f"Venda realizada: {quantidade_vendida} unidades de '{nome}' por R$ {valor_total:.2f}.")
+    else:
+        print("Produto não disponível ou quantidade insuficiente em estoque.")
+
+def relatorio_vendas():
+    if not vendas:
+        print("Nenhuma venda realizada.")
+        return
+    
+    print("Relatório de Vendas:")
+    for venda in vendas:
+        print(f"Produto: {venda['produto']}, Quantidade: {venda['quantidade']}, Valor Total: R$ {venda['valor_total']:.2f}")
+
+def menu():
+    print("\nMenu:")
+    print("1. Adicionar produto")
+    print("2. Buscar produto")
+    print("3. Visualizar produtos")
+    print("4. Vender produto")
+    print("5. Relatório de vendas")
+    print("6. Sair")
+
+    opcao = input("Escolha uma opção: ")
+        
+    if opcao == '1':
+        adicionar_produto()
+    elif opcao == '2':
+        buscar_produto()
+    elif opcao == '3':
+        visualizar_produtos()
+    elif opcao == '4':
+        vender_produto()
+    elif opcao == '5':
+        relatorio_vendas()
+    elif opcao == '6':
+        print("Saindo.")

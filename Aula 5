@@ -1,0 +1,134 @@
+1.
+def divisao():
+    try:
+        num1 = float(input("Digite o primeiro número: "))
+        num2 = float(input("Digite o segundo número: "))
+        resultado = num1 / num2
+        print(f"A divisão de {num1} por {num2} é: {resultado}")
+    except ZeroDivisionError:
+        print("Erro: Divisão por zero não é permitida.")
+    except ValueError:
+        print("Erro: Entrada inválida. Por favor, digite números válidos.")
+
+divisao()
+
+
+2.
+def mes_por_numero():
+    meses = {
+        1: "Janeiro",
+        2: "Fevereiro",
+        3: "Março",
+        4: "Abril",
+        5: "Maio",
+        6: "Junho",
+        7: "Julho",
+        8: "Agosto",
+        9: "Setembro",
+        10: "Outubro",
+        11: "Novembro",
+        12: "Dezembro"
+    }
+
+    try:
+        numero = int(input("Digite um número de 1 a 12 para o mês: "))
+        if 1 <= numero <= 12:
+            print(f"O mês correspondente é: {meses[numero]}")
+        else:
+            print("Erro: O número deve estar entre 1 e 12.")
+    except ValueError:
+        print("Erro: Entrada inválida. Por favor, digite um número.")
+
+mes_por_numero()
+
+
+3. 
+def ano_bissexto():
+    try:
+        ano = int(input("Digite um ano: "))
+        if (ano % 4 == 0 and ano % 100 != 0) or (ano % 400 == 0):
+            print(f"{ano} é um ano bissexto.")
+        else:
+            print(f"{ano} não é um ano bissexto.")
+    except ValueError:
+        print("Erro: Entrada inválida. Por favor, digite um ano válido.")
+
+ano_bissexto()
+
+
+4. 
+import math
+
+def combinacoes_alunos():
+    try:
+        N = int(input("Digite o total de alunos (N): "))
+        M = int(input("Digite o tamanho de um dos grupos (M): "))
+        if M >= N:
+            print("Erro: M deve ser menor que N.")
+            return
+        combinacoes = math.factorial(N) / (math.factorial(M) * math.factorial(N - M))
+        print(f"O número de combinações possíveis é: {int(combinacoes)}")
+    except ValueError:
+        print("Erro: Entrada inválida. Por favor, digite números válidos.")
+
+combinacoes_alunos()
+
+
+5.
+def caixa_eletronico():
+    saldo = 0
+    historico = []
+    transaction_limit = 500  # Limite de saque
+
+    while True:
+        print("\nMenu:")
+        print("1. Depositar dinheiro")
+        print("2. Sacar dinheiro")
+        print("3. Verificar saldo")
+        print("4. Histórico de movimentações")
+        print("5. Sair")
+
+        opcao = input("Escolha uma opção: ")
+
+        if opcao == '1':
+            try:
+                valor = float(input("Digite o valor a ser depositado: "))
+                if valor > 0:
+                    saldo += valor
+                    historico.append(f"Depósito: R$ {valor:.2f}")
+                    print(f"Depósito de R$ {valor:.2f} realizado com sucesso.")
+                else:
+                    print("Erro: O valor deve ser positivo.")
+            except ValueError:
+                print("Erro: Entrada inválida. Por favor, digite um número.")
+
+        elif opcao == '2':
+            try:
+                valor = float(input("Digite o valor a ser sacado: "))
+                if 0 < valor <= transaction_limit and valor <= saldo:
+                    saldo -= valor
+                    historico.append(f"Saque: R$ {valor:.2f}")
+                    print(f"Saque de R$ {valor:.2f} realizado com sucesso.")
+                elif valor > transaction_limit:
+                    print(f"Erro: O valor do saque não pode ultrapassar R$ {transaction_limit:.2f}.")
+                else:
+                    print("Erro: Saldo insuficiente.")
+            except ValueError:
+                print("Erro: Entrada inválida. Por favor, digite um número.")
+
+        elif opcao == '3':
+            print(f"Seu saldo atual é: R$ {saldo:.2f}")
+
+        elif opcao == '4':
+            print("Histórico de movimentações:")
+            for movimento in historico:
+                print(movimento)
+
+        elif opcao == '5':
+            print("Saindo do sistema.")
+            break
+
+        else:
+            print("Erro: Opção inválida. Por favor, escolha uma opção válida.")
+
+caixa_eletronico()

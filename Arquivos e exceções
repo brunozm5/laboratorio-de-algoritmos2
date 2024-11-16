@@ -1,0 +1,65 @@
+1.
+try:
+    with open("nomes.txt", "r") as arquivo:
+        conteudo = arquivo.readlines()
+        for linha in conteudo:
+            print(linha.strip())
+except FileNotFoundError:
+    print("Erro: O arquivo 'nomes.txt' não foi encontrado.")
+
+2.
+import random
+
+try:
+    x = int(input("Digite a quantidade de números aleatórios a serem gerados: "))
+    with open("numeros.txt", "w") as arquivo:
+        for _ in range(x):
+            numero = random.randint(0, 100)
+            arquivo.write(f"{numero}\n")
+    print(f"Arquivo 'numeros.txt' gerado com {x} números aleatórios.")
+except ValueError:
+    print("Erro: Por favor, insira um número inteiro válido.")
+
+3.
+import string
+
+try:
+    with open("artigo.txt", "r") as arquivo:
+        texto = arquivo.read().lower()
+        texto = texto.translate(str.maketrans("", "", string.punctuation))
+        palavras = texto.split()
+
+        contagem = {}
+        for palavra in palavras:
+            contagem[palavra] = contagem.get(palavra, 0) + 1
+
+        print("Relatório de contagem de palavras:")
+        for palavra, qtd in sorted(contagem.items()):
+            print(f"{palavra}: {qtd}")
+except FileNotFoundError:
+    print("Erro: O arquivo 'artigo.txt' não foi encontrado.")
+
+4. 
+try:
+    with open("texto.txt", "r") as arquivo:
+        conteudo = arquivo.read()
+        palavras = conteudo.split()
+        print(f"O arquivo contém {len(palavras)} palavras.")
+except FileNotFoundError:
+    print("Erro: O arquivo 'texto.txt' não foi encontrado.")
+
+5.
+try:
+    with open("lista1.txt", "r") as arquivo1, open("lista2.txt", "r") as arquivo2:
+        lista1 = set(arquivo1.read().splitlines())
+        lista2 = set(arquivo2.read().splitlines())
+
+    diferenca = lista1 - lista2
+
+    with open("diferenca.txt", "w") as arquivo_diferenca:
+        for item in diferenca:
+            arquivo_diferenca.write(f"{item}\n")
+    
+    print("Arquivo 'diferenca.txt' gerado com os itens exclusivos de 'lista1.txt'.")
+except FileNotFoundError as e:
+    print(f"Erro: O arquivo '{e.filename}' não foi encontrado.")

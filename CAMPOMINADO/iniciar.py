@@ -23,6 +23,7 @@ def main():
             escolher(nome, tabuleiro, minas)
         elif menu == 2:
             ver_scores()
+        
         elif menu == 3:
             print("Até logo!")
             break
